@@ -1,1 +1,36 @@
-Personal Finance Tracker
+<div>
+  <input type="text" placeholder="Title" [(ngModel)]="newEntry.title" />
+  <input type="number" placeholder="Amount" [(ngModel)]="newEntry.amount" />
+  <button (click)="addTransaction(true)">Add as income</button>
+  <button (click)="addTransaction(false)">Add as expense</button>
+</div>
+<br />
+<div>Balance: ₹ {{getBalance()}}</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 text-center" style="padding-top: 20px;">
+      <div class="container box" style="margin-top: 10px;">
+        <table id="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Amount</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let entry of transactions$ | async">
+              <td scope="row">{{ entry.title }}</td>
+              <td class="{{getClass(entry.amount)}}">₹ {{ getValue(entry.amount) }}</td>
+              <td>
+                <button (click)="deleteTransaction(entry.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
